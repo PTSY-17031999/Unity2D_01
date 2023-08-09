@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float _Hp; // 
+
     public float _Speed = 2f; // Tốc độ di chuyển
     float _Def;
     float _AttackDmg;
@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     }
     private void Start_Move()
     {
-        _Move_Component.Set(_Speed);
+        _Move_Component.Set(_Speed, 2);
     }
 }
  

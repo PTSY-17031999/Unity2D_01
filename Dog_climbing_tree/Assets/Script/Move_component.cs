@@ -19,15 +19,14 @@ public class Move_component : MonoBehaviour
 
 
 
-    // Set tốc độ chạy
-    public void Set(float speed)
+    // Set tốc độ chạy và vị trí bất đầu 
+    public void Set(float speed , int location_tree_and_side) 
     {
-        Debug.Log("NG");
         this.speed = speed; // Sét tốc độ bằng tốc độ Enemy.
         _Path = _path.GetListPosition();
-        transform.position = _Path[0]; // sét đối tượng về vị trí bắt đàu di chuyển
-        _startPos = _Path[currentIndex]; // sét vị trí bắt đàu di chuyển mỗi chặng
-        _endPos = _Path[currentIndex + 1]; // sét vị trí kết thúc di chuyển mỗi chặng
+        transform.position = _Path[location_tree_and_side]; // sét đối tượng về vị trí bắt đàu di chuyển
+        _startPos = _Path[location_tree_and_side]; // sét vị trí bắt đàu di chuyển mỗi chặng
+        _endPos = _Path[location_tree_and_side + 1]; // sét vị trí kết thúc di chuyển mỗi chặng
                                            // _Path  
     }
 
@@ -39,10 +38,9 @@ public class Move_component : MonoBehaviour
 
     private void Update()
     {
-        if (isReached == false)
-        {
+       
             Movement();
-        }
+        
 
 
     }
@@ -55,16 +53,7 @@ public class Move_component : MonoBehaviour
 
         if (Vector3.Distance(transform.position, _endPos) <= 0.05f) // Nếu vị trí hiện tại đến điểm cuối < = gần  đổi hướng
         {
-            currentIndex += 1;
-            if (currentIndex == _Path.Count - 1)
-            {
-                //ket thuc
-                isReached = true;
-                return;
-            }
-
-            _startPos = _Path[currentIndex];
-            _endPos = _Path[currentIndex + 1];
+            Destroy(gameObject);
         }
     }
 
