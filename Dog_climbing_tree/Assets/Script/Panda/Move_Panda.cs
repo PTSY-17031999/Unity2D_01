@@ -1,34 +1,49 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Move_Panda : MonoBehaviour
 {
-    public float speed = 8f; // Tốc độ
+    float speed; // Tốc độ
     public Path _path;
     private List<Vector3> _Path = new List<Vector3>();
-    public int location_tree_and_side;
+    int location_tree_and_side;
+    bool Check_pressed_space; //nút space được nhân
 
 
 
 
-    private void Start()
+    public void Set_Star( float speed , int location_tree_and_side)
     {
-        //this.speed = speed; // Sét tốc độ bằng tốc độ Enemy.
-        speed = 5f;
+        this.speed = speed; // Sét tốc độ bằng tốc độ Panda.
+        this.location_tree_and_side = location_tree_and_side; // Sét vị trí hiện tại của Panda 
         _Path = _path.GetListPosition();
-        location_tree_and_side = 8; // Sét vị trí hiện tại của Panda 
+       
         transform.position = new Vector3(_Path[location_tree_and_side].x, transform.position.y, transform.position.z); // sét đối tượng về vị trí bắt đàu di chuyển
     }
 
 
     private void Update()
     {
+        Attack();
+        if (Check_pressed_space == false)
+        {
+            Movement();
+        }
+       
 
-        Movement();
 
 
+    }
 
+    private void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)){
+            Check_pressed_space = true;
+           
+        }else Check_pressed_space = false;
+ 
     }
 
     private void Movement()
@@ -39,10 +54,10 @@ public class Move_Panda : MonoBehaviour
         bool Move_Down_direction = Input.GetKey(KeyCode.S);
 
         // Di chuyển Lên xuống
-        if (Move_Top_direction && _Path[2].y <= transform.position.y) {
+        if (Move_Top_direction && _Path[1].y >= transform.position.y && transform.position.y < 4.2f) {
             transform.position += new Vector3(0, speed * Time.deltaTime, 0); // Cho đối tượng di chuyển
         }
-        if (Move_Down_direction && _Path[1].y >= transform.position.y)
+        if (Move_Down_direction && _Path[0].y <= transform.position.y)
         {
             transform.position -= new Vector3(0, speed * Time.deltaTime, 0); // Cho đối tượng di chuyển
         }

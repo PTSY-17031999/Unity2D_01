@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy_Right
   - Enemi_Left
+  - Panda
+  - Panel_AD_or_Ground
   layers:
   - Default
   - TransparentFX
