@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy_Right
   - Enemi_Left
-  - Panda
   - Panel_AD_or_Ground
+  - Panda
+  - Enemy
   layers:
   - Default
   - TransparentFX

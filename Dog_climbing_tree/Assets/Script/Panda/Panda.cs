@@ -6,7 +6,7 @@ public class Panda : MonoBehaviour
 {
     Game_Controller Conect_Class_Game_Controller;
     Audio_Controller Conect_Class_Audio_Controller;
-    Rigidbody2D ThamChieuToiNhaVat;
+    Rigidbody2D Connect_physical; //Kết nối tới vật lý của nhân vật
     Move_Panda Conect_Move_Panda;
     public int location_tree_and_side; //Vị trí panda ở cây nào
     public float speed = 8f; // Tốc độ
@@ -17,7 +17,7 @@ public class Panda : MonoBehaviour
         Conect_Class_Game_Controller = FindObjectOfType<Game_Controller>();
         Conect_Class_Audio_Controller = FindObjectOfType<Audio_Controller>();
         Conect_Move_Panda = FindObjectOfType<Move_Panda>();
-        ThamChieuToiNhaVat = GetComponent<Rigidbody2D>();
+        Connect_physical = GetComponent<Rigidbody2D>();
 
         Conect_Move_Panda.Set_Star(5f, 6);
         
@@ -29,23 +29,41 @@ public class Panda : MonoBehaviour
         
     }
 
+    // Xử lý khi Panda DIE
     void Handling_Panda_Die()
     {
         gameObject.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        ThamChieuToiNhaVat.AddForce(Vector2.up * 150);
-        ThamChieuToiNhaVat.AddForce(Vector2.right * 50);
+        Connect_physical.AddForce(Vector2.up * 150);
+        Connect_physical.AddForce(Vector2.right * 50);
         Conect_Class_Game_Controller.Set_Over_Game(true);
         Debug.Log("Panda touches the ground, game over");
         Conect_Class_Audio_Controller.Play_Panda_Dead_sound();
     }
 
 
-    //SỰ KIỆN NHÂN VẬT CHẠM ĐẤT
+    
+
+    //Panda chạm đất or chạm Enemy
     private void OnTriggerEnter2D(Collider2D col)
     {
+        //SỰ KIỆN NHÂN VẬT CHẠM ĐẤT
         if (col.CompareTag("Panel_AD_or_Ground"))
         {
             Handling_Panda_Die();
         }
+        //Sự kiện Panda chạm Enemy
+        if (col.CompareTag("Enemy"))
+        {
+            // Tiêu diệt Enemy khi Panda đang ở chế độ tấn công
+            if (Conect_Move_Panda.Return_Panda_Attack() == true) {
+                col.GetComponent<Enemy>().Handling_Enemy_Die();
+                return;
+            }
+            // Panda chết khi chạm vào Enemy khi chức năng tấn công ko được bật
+            Handling_Panda_Die();
+        }
+
     }
+   
+
 }
