@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Move_component : MonoBehaviour
 {
-    float speed; //Tốc độ
+    float speed = 1f; //Tốc độ
     public Path _path;
     private List<Vector3> _Path = new List<Vector3>();
 
@@ -15,8 +15,6 @@ public class Move_component : MonoBehaviour
     public Vector3 _endPos;   // Vi trí kết thúc của mỗi chặng
 
     public int currentIndex = 0; // Biến đếm
-    private bool isReached = false; // kiểm tra đã tới đích chưa
-
 
 
     // Set tốc độ chạy và vị trí bất đầu 
@@ -27,7 +25,8 @@ public class Move_component : MonoBehaviour
         transform.position = _Path[location_tree_and_side]; // sét đối tượng về vị trí bắt đàu di chuyển
         _startPos = _Path[location_tree_and_side]; // sét vị trí bắt đàu di chuyển mỗi chặng
         _endPos = _Path[location_tree_and_side + 1]; // sét vị trí kết thúc di chuyển mỗi chặng
-                                           // _Path  
+
+       
     }
 
     private void Start()
@@ -38,7 +37,9 @@ public class Move_component : MonoBehaviour
 
     private void Update()
     {
-       
+        //if (Miss_Set == true) return;
+
+
             Movement();
         
 

@@ -10,12 +10,11 @@ public class Path : MonoBehaviour
     public List<Vector3> GetListPosition()
     {
         List<Vector3> Position = new List<Vector3>();
-        for(int i = 0; i < ListPositions.Count; i++)
+        for(int i = 0; i <= ListPositions.Count-1; i++)
         {
             Position.Add(ListPositions[i].position);
         }
-
-        return Position;
+               return Position;
     }
 
 
