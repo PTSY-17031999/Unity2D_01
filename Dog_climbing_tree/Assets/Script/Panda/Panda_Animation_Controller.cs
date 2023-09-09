@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,24 +12,29 @@ public class Panda_Animation_Controller : MonoBehaviour
     void Start()
     {
         animi = GetComponent<Animator>();
-        animi.SetInteger("Status", 4 );
+        animi.SetInteger("Status", 0 );
     }
     private void Update()
     {
-       // animi.SetInteger("Status", 5);
+      
     }
 
     public void Set_Status(int Status)
     {
         /* 
-         * "Up" = 0
-         * "Down" = 1
-         * "Death" = 2
-         * "Attack" = 3
-         * "Jump" = 4
-         * "Nothing" = 5
-         * "Net_Panda" = 6
+         * Nothing: 0
+         * Right_To_Left hoặc ngược lại: 1
+         * Attack: 2
+         * Jump: 3
+         * Death: 4
+         * Down: 5
+         * Up: 6
         */
         animi.SetInteger("Status", Status);
+    }
+
+    public int Get_Status()
+    {
+        return animi.GetInteger("Status");
     }
 }

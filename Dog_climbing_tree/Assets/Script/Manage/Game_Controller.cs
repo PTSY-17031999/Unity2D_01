@@ -13,11 +13,13 @@ public class Game_Controller : MonoBehaviour
     int Time_Life; // Thời gian sống
     Manage_Ui_Gameplay Conect_Manage_Ui_Gameplay;
     Data_Controller Conect_Data_Controler;
+   
     // Start is called before the first frame update
     void Start()
     {
         Conect_Manage_Ui_Gameplay = FindObjectOfType<Manage_Ui_Gameplay>();
         Conect_Data_Controler = FindObjectOfType<Data_Controller>();
+       
 
     }
 

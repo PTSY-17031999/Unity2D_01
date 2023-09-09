@@ -44,7 +44,7 @@ public class Panda : MonoBehaviour
     // Xử lý khi Panda DIE
     void Handling_Panda_Die()
     {
-
+        Conect_P_A_C.Set_Status(4);
         gameObject.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         Connect_physical.AddForce(Vector2.up * 150);
         Conect_Class_Game_Controller.Set_Over_Game(true);
@@ -86,21 +86,36 @@ public class Panda : MonoBehaviour
     {
         
         this.location_tree_and_side = location_tree_and_side;
-        #region Anmation di chuyển qua lại trên 1 cây
-        //if (Last_Location == 0 && location_tree_and_side == 2 || Last_Location == 4 && location_tree_and_side == 6 || Last_Location == 8 && location_tree_and_side == 10)
-
+        #region Chọn Panda left or right
         if (location_tree_and_side % 4 != 0)
         {
             Panda_Right.SetActive(true);
             Panda_Left.SetActive(false);
-            Conect_P_A_C.Set_Status(6);
         }
         else
         {
             Panda_Right.SetActive(false);
             Panda_Left.SetActive(true);
-            Conect_P_A_C.Set_Status(6);
         }
+        #endregion
+
+        #region Anmation di chuyển qua lại trên 1 cây
+        if (
+            // Panda Right to Left
+            Last_Location == 0 && location_tree_and_side == 2 || Last_Location == 4 && location_tree_and_side == 6 || Last_Location == 8 && location_tree_and_side == 10 ||
+             // Panda Left to Right
+             Last_Location == 2 && location_tree_and_side == 0 || Last_Location == 6 && location_tree_and_side == 4 || Last_Location == 10 && location_tree_and_side == 8
+            )
+        {
+            Conect_P_A_C.Set_Status(1);
+            Debug.Log("Sy Testting");
+        }
+
+            #endregion
+
+
+            #region Anmation di chuyển qua lại trên 1 cây
+            
         #endregion
 
 
@@ -109,28 +124,7 @@ public class Panda : MonoBehaviour
 
     }
 
-    public void Choose_Panda(bool Panda_Move_Up , bool Panda_Move_Down)
-    {
 
-        #region Animation di chuyển lên
-        if (Panda_Move_Up == true)
-        {
-            Conect_P_A_C.Set_Status(0);
-            return;
-        }
-        #endregion
 
-        #region Animation di chuyển xuống
-        if (Panda_Move_Down == true)
-        {
-            Conect_P_A_C.Set_Status(1);
-            Debug.Log("Down1111");
-            return;
-        }
-        #endregion
 
-        #region Đứng yên
-        Conect_P_A_C.Set_Status(5);
-        #endregion
-    }
 }

@@ -14,11 +14,14 @@ public class Move_Panda : MonoBehaviour
     public float Save_location_Y; // Lưu lại vị trí trước khi tấn công
 
     Panda Panda;
+    Panda_Animation_Controller Conect_P_A_C;
 
     private void Start()
     {
         Panda = FindObjectOfType<Panda>();
+        Conect_P_A_C = FindObjectOfType<Panda_Animation_Controller>();
         Panda.Choose_Panda(-1, location_tree_and_side);
+
     }
 
 
@@ -59,12 +62,14 @@ public class Move_Panda : MonoBehaviour
             if (_Path[0].y <= transform.position.y)
             {
                 transform.position -= new Vector3(0, speed * Time.deltaTime, 0); // Cho đối tượng di chuyển
+                Conect_P_A_C.Set_Status(2);
             }
 
         }
         else
         {
             Check_pressed_space = false;
+            Conect_P_A_C.Set_Status(0);
         }
 
         //Luu lại vị trí cũ
@@ -74,11 +79,13 @@ public class Move_Panda : MonoBehaviour
         // Cho panda về vị trí cũ nếu vừa tấn công
         if (W_key_after_attacking == true)
         {
+            Conect_P_A_C.Set_Status(10);
             transform.position += new Vector3(0, speed * Time.deltaTime, 0);
             Debug.Log("Veef laij vij tri cu");
             //kiểm tra xem panda đã về vị trí trước khi tấn công chưa
             if (transform.position.y >= Save_location_Y)
             {
+                Conect_P_A_C.Set_Status(6);
                 conversion_step = false;
                 W_key_after_attacking = false;
 
@@ -117,19 +124,21 @@ public class Move_Panda : MonoBehaviour
         if ((Move_Top_direction_W || Move_Top_Down_direction > 0) && _Path[1].y >= transform.position.y && transform.position.y < 4.2f) 
         {
             Debug.Log("Click W");
-            if(conversion_step == true)  W_key_after_attacking = true;
+           
+            if (conversion_step == true)  W_key_after_attacking = true;
+            Conect_P_A_C.Set_Status(6);
             transform.position += new Vector3(0, speed * Time.deltaTime, 0); // Cho đối tượng di chuyển
-            Panda.Choose_Panda(true, false);
-            return;
+            //if (Conect_P_A_C.Get_Status() == 10) return;
         }
          
 
         if ((Move_Down_direction_S || Move_Top_Down_direction <0) && _Path[0].y <= transform.position.y)
         {
-
+            
             conversion_step = false; // Xóa biến lưu vừa tấn cống
+            Conect_P_A_C.Set_Status(5);
             transform.position -= new Vector3(0, speed * Time.deltaTime, 0); // Cho đối tượng di chuyển
-            Panda.Choose_Panda(false, true);
+            //if (Conect_P_A_C.Get_Status() == 8) return;
             return;
         }
 
@@ -151,9 +160,10 @@ public class Move_Panda : MonoBehaviour
             Panda.Choose_Panda(location_tree_and_side - 2, location_tree_and_side);
             return;
         }
+        //if(Conect_P_A_C.Get_Status()%2 ==0)
+       // Conect_P_A_C.Set_Status(Conect_P_A_C.Get_Status() + 1);
 
-
-        Panda.Choose_Panda(false, false);
+        //Panda.Choose_Panda(false, false);
     }
 
 
