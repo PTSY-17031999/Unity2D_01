@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public Animator animi;
     Game_Controller Conect_Game_cotroler;
     BoxCollider2D _BoxCollider2D;
+    public GameObject Enemy_Right;
 
 
 
@@ -28,12 +29,16 @@ public class Enemy : MonoBehaviour
 
 
     // Sét tham số cho Enemy
-    public void Set_Value( int location_tree_and_side, float _Speed)
+    public void Set_Value( int location_tree_and_side, float _Speed, bool Check_Type_Enemi_Right)
     {
         //Set loại Enemy trái or phải
         this.location_tree_and_side = location_tree_and_side;
         this._Speed = _Speed;
         _Move_Component.Set(_Speed, location_tree_and_side);
+        if(Check_Type_Enemi_Right == true) {
+            Enemy_Right.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        
 
     }
    

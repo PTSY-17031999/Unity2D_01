@@ -12,15 +12,15 @@ public class Panda_Animation_Controller : MonoBehaviour
     void Start()
     {
         animi = GetComponent<Animator>();
-        animi.SetInteger("Status", 0 );
+        Debug.Log("Sy testing 01/10 22:50");
     }
     private void Update()
     {
-      
     }
 
-    public void Set_Status(int Status)
+    public void Set_Status(float Blend)
     {
+        animi.SetFloat("Blend", Blend);
         /* 
          * Nothing: 0
          * Right_To_Left hoặc ngược lại: 1
@@ -30,11 +30,10 @@ public class Panda_Animation_Controller : MonoBehaviour
          * Down: 5
          * Up: 6
         */
-        animi.SetInteger("Status", Status);
     }
 
-    public int Get_Status()
+    public float Get_Status()
     {
-        return animi.GetInteger("Status");
+        return animi.GetFloat("Status");
     }
 }

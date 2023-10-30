@@ -16,6 +16,8 @@ public class Move_component : MonoBehaviour
 
     public int currentIndex = 0; // Biến đếm
 
+    Game_Controller Conect_Game_Controler;
+
 
     // Set tốc độ chạy và vị trí bất đầu 
     public void Set(float speed , int location_tree_and_side) 
@@ -31,16 +33,16 @@ public class Move_component : MonoBehaviour
 
     private void Start()
     {
-       
+        Conect_Game_Controler = FindObjectOfType<Game_Controller>(); 
     }
     
 
     private void Update()
     {
-        //if (Miss_Set == true) return;
+        if (Conect_Game_Controler.Get_Pause_Game() == true) return;
 
 
-            Movement();
+        Movement();
         
 
 

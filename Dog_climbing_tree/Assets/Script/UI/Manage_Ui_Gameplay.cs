@@ -30,9 +30,14 @@ public class Manage_Ui_Gameplay : MonoBehaviour
     public List<GameObject> Score_Over_Hundred;
     #endregion
 
+    public GameObject Button_Play_Game;
+    public GameObject Button_Pause_Game;
+    Game_Controller Conect_Game_Controler;
     
     public void Start()
     {
+        Conect_Game_Controler = FindObjectOfType<Game_Controller>();
+        Button_Pause_Game.SetActive(true);
         // Ẩn toàn bộ các các số thời gian và điểm
         for (int i = 0; i <= Score_Unit.Count - 1; i++)
         {
@@ -58,18 +63,52 @@ public class Manage_Ui_Gameplay : MonoBehaviour
 
     float Miss_Time = 0;
     float _Time = 1f;
+    float Parallel_Time;
+    float Start_Time = 0;
+    bool Miss_Stop_Start_Time = false;
     
     private void Update()
     {
-       
+       if(Conect_Game_Controler.Get_Pause_Game() == true)
+        {
+            if(Miss_Stop_Start_Time == false)
+            {
+                Start_Time = Time.time;
+                Miss_Stop_Start_Time = true;
+            }
+            
+            return;
+        }
+        else
+        {
+            Miss_Stop_Start_Time = false;
+           
+        }
+
+       if(Start_Time == 0)
+        {
+            Parallel_Time = Time.time;
+        }
+        else
+        {
+            Parallel_Time = Time.time - (Time.time - Start_Time);
+        }
+        
         // Xử lý thời gian sống
         Miss_Time += Time.deltaTime;
         if (Miss_Time >= _Time)
         {
             //Debug.Log((int)Math.Round(Time.time));
-            processing((int)Math.Round(Time.time), Time_Unit, Time_Dozen, Time_Hundred, Time_Thousand);
+            processing((int)Math.Round(Parallel_Time), Time_Unit, Time_Dozen, Time_Hundred, Time_Thousand);
             Miss_Time = 0;
         }
+    }
+
+    // Xứ lý show image Play or Pause game
+    public void Show_Image_Play_Pause( bool Is_Play)
+    {
+        Button_Play_Game.SetActive(Is_Play);
+        Button_Pause_Game.SetActive(!Is_Play);
     }
 
 

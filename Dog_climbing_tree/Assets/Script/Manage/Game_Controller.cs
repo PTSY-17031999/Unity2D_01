@@ -8,7 +8,8 @@ public class Game_Controller : MonoBehaviour
 {
 
 
-    public bool Is_Over_game = false;
+    [SerializeField] private bool Is_Over_game = false;
+    [SerializeField] private bool Is_Pause_game = false;
     int Score = 0; // Điểm số
     int Time_Life; // Thời gian sống
     Manage_Ui_Gameplay Conect_Manage_Ui_Gameplay;
@@ -30,15 +31,35 @@ public class Game_Controller : MonoBehaviour
     }
 
 
-    // Sét game over
+    // Set game over
     public void Set_Over_Game(bool is_over)
     {
         Is_Over_game = is_over;
         Conect_Manage_Ui_Gameplay.Show_Panel_Play_or_Over();
         Conect_Manage_Ui_Gameplay.Change_Score_Over(Score);
         Save_highests_core();
-
+        Set_Pause_Game();
         Debug.Log("Game Over");
+    }
+
+    // Set Pause game
+    public void Set_Pause_Game()
+    {
+        if(Is_Pause_game == false)
+        {
+            Is_Pause_game = true;
+            Conect_Manage_Ui_Gameplay.Show_Image_Play_Pause(Is_Pause_game);
+        }
+        else
+        {
+            Is_Pause_game = false;
+            Conect_Manage_Ui_Gameplay.Show_Image_Play_Pause(Is_Pause_game);
+        }
+    }
+
+    public bool Get_Pause_Game()
+    {
+        return Is_Pause_game;
     }
 
     private void Save_highests_core()

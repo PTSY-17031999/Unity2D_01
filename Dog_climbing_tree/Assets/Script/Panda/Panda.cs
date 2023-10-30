@@ -14,7 +14,6 @@ public class Panda : MonoBehaviour
     BoxCollider2D _BoxCollider2D;
 
     // Ket nối để thấy đổi Panda
-    public GameObject Panda_Right;
     public GameObject Panda_Left;
 
     Panda_Animation_Controller Conect_P_A_C;
@@ -44,13 +43,14 @@ public class Panda : MonoBehaviour
     // Xử lý khi Panda DIE
     void Handling_Panda_Die()
     {
-        Conect_P_A_C.Set_Status(4);
+        
         gameObject.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         Connect_physical.AddForce(Vector2.up * 150);
         Conect_Class_Game_Controller.Set_Over_Game(true);
         _BoxCollider2D.enabled = false;
         Debug.Log("Panda touches the ground, game over");
         Conect_Class_Audio_Controller.Play_Panda_Dead_sound();
+        Conect_P_A_C.Set_Status(4);
     }
 
 
@@ -89,13 +89,11 @@ public class Panda : MonoBehaviour
         #region Chọn Panda left or right
         if (location_tree_and_side % 4 != 0)
         {
-            Panda_Right.SetActive(true);
-            Panda_Left.SetActive(false);
+            Panda_Left.transform.localScale = new Vector3(1 , 1, 1);
         }
         else
         {
-            Panda_Right.SetActive(false);
-            Panda_Left.SetActive(true);
+            Panda_Left.transform.localScale = new Vector3(-1, 1, 1);
         }
         #endregion
 

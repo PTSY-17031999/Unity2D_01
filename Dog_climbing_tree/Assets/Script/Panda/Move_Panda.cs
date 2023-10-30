@@ -15,9 +15,11 @@ public class Move_Panda : MonoBehaviour
 
     Panda Panda;
     Panda_Animation_Controller Conect_P_A_C;
+    Game_Controller Conect_Game_Controler;
 
     private void Start()
     {
+        Conect_Game_Controler = FindObjectOfType<Game_Controller>();
         Panda = FindObjectOfType<Panda>();
         Conect_P_A_C = FindObjectOfType<Panda_Animation_Controller>();
         Panda.Choose_Panda(-1, location_tree_and_side);
@@ -38,6 +40,7 @@ public class Move_Panda : MonoBehaviour
 
     private void Update()
     {
+        if (Conect_Game_Controler.Get_Pause_Game() == true) return;
         Attack();
         if (Check_pressed_space == false)
         { 
@@ -148,6 +151,11 @@ public class Move_Panda : MonoBehaviour
         {
             conversion_step = false; // Xóa biến lưu vừa tấn cống
             location_tree_and_side -= 2;
+            //Set animation
+            if (location_tree_and_side == 8 || location_tree_and_side == 4 || location_tree_and_side == 2)
+            {
+                Conect_P_A_C.Set_Status(3);
+            }
             transform.position = new Vector3(_Path[location_tree_and_side].x, transform.position.y, transform.position.z); // Cho đối tượng di chuyển
             Panda.Choose_Panda(location_tree_and_side + 2, location_tree_and_side);
             return;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Create_Enemy : MonoBehaviour
 {
-    int location_tree_and_side; //Vị trí xuất hiện Enemy
+    [SerializeField] int location_tree_and_side; //Vị trí xuất hiện Enemy
     public List<Enemy> Enemy_Type_Right; // Các loại Enemy hướng đi phải
     public List<Enemy> Enemy_Type_Left; // Các loại Enemy hướng đi trái
 
@@ -13,13 +13,23 @@ public class Create_Enemy : MonoBehaviour
     public float TimeSet_value = 40; // Thời gian tạo ra Enemi
     float Miss_Time = 0;
     bool Miss = false;
+    Game_Controller Conect_Game_Controler;
+
+    private void Start()
+    {
+        Conect_Game_Controler = FindObjectOfType<Game_Controller>();
+    }
 
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Conect_Game_Controler.Get_Pause_Game() == true)
+        {
+            return;
+        }
+
         if (Miss != true)
         {
             Set_value();
@@ -66,8 +76,8 @@ public class Create_Enemy : MonoBehaviour
         // Sinh ra các Enemy nếu Enemy phía trái
         if (location_tree_and_side == 0 || location_tree_and_side == 4 || location_tree_and_side == 8)
         {
-            enemy = Instantiate(Enemy_Type_Left[Enemy_Type]);
-            enemy.Set_Value(location_tree_and_side, 1f); 
+            enemy = Instantiate(Enemy_Type_Right[Enemy_Type]);
+            enemy.Set_Value(location_tree_and_side, 1f, true); 
             
         }
 
@@ -75,7 +85,7 @@ public class Create_Enemy : MonoBehaviour
         if (location_tree_and_side == 2 || location_tree_and_side == 6 || location_tree_and_side == 10)
         {
             enemy = Instantiate(Enemy_Type_Right[Enemy_Type]);
-            enemy.Set_Value(location_tree_and_side, 1f);
+            enemy.Set_Value(location_tree_and_side, 1f, false);
            
         }
     }

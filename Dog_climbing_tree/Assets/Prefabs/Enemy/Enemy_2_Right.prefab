@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2109734844410761978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6393041750144030815}
+  m_Layer: 0
+  m_Name: Support
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6393041750144030815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109734844410761978}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7009589736244455935}
+  m_Father: {fileID: 7009589737204978334}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7009589736244455934
 GameObject:
   m_ObjectHideFlags: 0
@@ -25,11 +56,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7009589736244455934}
-  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.19, y: -0.45, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.13, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7009589737204978334}
+  m_Father: {fileID: 6393041750144030815}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7009589736244455905
@@ -133,7 +164,7 @@ Transform:
   m_LocalPosition: {x: 0, y: -2.112, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7009589736244455935}
+  - {fileID: 6393041750144030815}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -153,6 +184,7 @@ MonoBehaviour:
   _Move_Component: {fileID: 7009589737204978332}
   location_tree_and_side: 2
   animi: {fileID: 7009589736244455904}
+  Enemy_Right: {fileID: 2109734844410761978}
 --- !u!114 &7009589737204978332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _path: {fileID: 9015489681628435223, guid: 9d7d0ad61ef61174f84414ca46978c31, type: 3}
-  _startPos: {x: 0, y: -10, z: 0}
+  _startPos: {x: 0, y: 0, z: 0}
   _endPos: {x: 0, y: 0, z: 0}
   currentIndex: 0
 --- !u!61 &7009589737204978331
