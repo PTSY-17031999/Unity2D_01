@@ -20,6 +20,8 @@ public class Manage_menus : MonoBehaviour
 
     private void Start()
     {
+        // Khi Play lần đầu game, xóa biến nhớ thời gian
+        PlayerPrefs.SetFloat("Start_Time", 0);
         On_Off_Audio();
     }
 

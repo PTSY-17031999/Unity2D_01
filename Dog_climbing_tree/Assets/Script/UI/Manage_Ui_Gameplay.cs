@@ -64,43 +64,40 @@ public class Manage_Ui_Gameplay : MonoBehaviour
     float Miss_Time = 0;
     float _Time = 1f;
     float Parallel_Time;
-    float Start_Time = 0;
     bool Miss_Stop_Start_Time = false;
-    
+    bool Miss_Pause = false; // Nhớ đang pause game chưa play
+
     private void Update()
     {
-       if(Conect_Game_Controler.Get_Pause_Game() == true)
-        {
-            if(Miss_Stop_Start_Time == false)
-            {
-                Start_Time = Time.time;
-                Miss_Stop_Start_Time = true;
-            }
-            
-            return;
-        }
-        else
-        {
-            Miss_Stop_Start_Time = false;
-           
-        }
 
-       if(Start_Time == 0)
+        if (Conect_Game_Controler.Get_Pause_Game() == true)
         {
-            Parallel_Time = Time.time;
+            if (Miss_Pause == false)
+            {
+                Parallel_Time = Time.time;
+                Miss_Pause = true;
+            }
+            else
+            {
+                PlayerPrefs.SetFloat("Start_Time", Time.time - Parallel_Time);
+            }
+
         }
         else
         {
-            Parallel_Time = Time.time - (Time.time - Start_Time);
-        }
-        
-        // Xử lý thời gian sống
-        Miss_Time += Time.deltaTime;
-        if (Miss_Time >= _Time)
-        {
-            //Debug.Log((int)Math.Round(Time.time));
-            processing((int)Math.Round(Parallel_Time), Time_Unit, Time_Dozen, Time_Hundred, Time_Thousand);
-            Miss_Time = 0;
+            Parallel_Time = Time.time - PlayerPrefs.GetFloat("Start_Time");
+            Miss_Pause = false;
+
+
+            // Xử lý thời gian sống
+            Miss_Time += Time.deltaTime;
+            if (Miss_Time >= _Time)
+            {
+                //Debug.Log((int)Math.Round(Time.time));
+                processing((int)Math.Round(Parallel_Time), Time_Unit, Time_Dozen, Time_Hundred, Time_Thousand);
+                Miss_Time = 0;
+            }
+            Conect_Game_Controler.Set_Level_Game(Parallel_Time);
         }
     }
 

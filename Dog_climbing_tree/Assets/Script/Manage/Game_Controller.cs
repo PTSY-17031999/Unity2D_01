@@ -14,12 +14,15 @@ public class Game_Controller : MonoBehaviour
     int Time_Life; // Thời gian sống
     Manage_Ui_Gameplay Conect_Manage_Ui_Gameplay;
     Data_Controller Conect_Data_Controler;
-   
+    [SerializeField] private int _Level; // Cấp độ trong game
+    Create_Enemy Conect_Create_Enemy;
+
     // Start is called before the first frame update
     void Start()
     {
         Conect_Manage_Ui_Gameplay = FindObjectOfType<Manage_Ui_Gameplay>();
         Conect_Data_Controler = FindObjectOfType<Data_Controller>();
+        Conect_Create_Enemy = FindObjectOfType<Create_Enemy>();
        
 
     }
@@ -84,7 +87,7 @@ public class Game_Controller : MonoBehaviour
         }
     }
 
-    // Gét game over
+    // Get game over
     public bool Get_Over_Game()
     {
         return Is_Over_game;
@@ -96,6 +99,35 @@ public class Game_Controller : MonoBehaviour
         Score++;
         Conect_Manage_Ui_Gameplay.Change_Score(Score);
     }
+
+    #region Level
+    public void Set_Level_Game(float Time_Live)
+    {
+             if (Time_Live >= 60 && Time_Live <= 61) Conect_Create_Enemy.Return_Value_Level(2);
+        else if (Time_Live >= 120 && Time_Live <= 121) Conect_Create_Enemy.Return_Value_Level(3);
+        else if (Time_Live >= 180 && Time_Live <= 181) Conect_Create_Enemy.Return_Value_Level(4);
+        else if (Time_Live >= 240 && Time_Live <= 241) Conect_Create_Enemy.Return_Value_Level(5);
+        else if (Time_Live >= 300 && Time_Live <= 301) Conect_Create_Enemy.Return_Value_Level(6);
+        else if (Time_Live >= 360 && Time_Live <= 361) Conect_Create_Enemy.Return_Value_Level(7);
+        else if (Time_Live >= 420 && Time_Live <= 421) Conect_Create_Enemy.Return_Value_Level(8);
+        else if (Time_Live >= 480 && Time_Live <= 481) Conect_Create_Enemy.Return_Value_Level(9);
+    }
+    public int Get_Level_Game()
+    {
+        return _Level;
+    }
+    #endregion
+
+
+
+
+
+
+
+
+
+
+
 
 
     public void No_play_Again()

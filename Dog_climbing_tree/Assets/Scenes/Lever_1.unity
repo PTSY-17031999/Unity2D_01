@@ -2102,6 +2102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d599a494be1f93d46a4318de3283b100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  location_tree_and_side: 0
   Enemy_Type_Right:
   - {fileID: 6767206833131537552, guid: dd4d31f6759e3d04db6346107184888f, type: 3}
   - {fileID: 7009589737204978333, guid: ac2ab55385a61b744a019acbc1ca5112, type: 3}
@@ -2112,6 +2113,10 @@ MonoBehaviour:
   - {fileID: 8260430610942664203, guid: 5723962c2cc75814aae185a796e15ce7, type: 3}
   - {fileID: 5235730038894466144, guid: 0335290fde24cb84d8142fa7cf0f5459, type: 3}
   - {fileID: 737611229059544347, guid: 13cb1282d349fcb45b146aed093b12d8, type: 3}
+  Enemy_Type: 0
+  Quantity_Enemy: 0
+  Speed_Enemy: 1
+  Max_Quantity_Enemy: 6
   TimeSet_value: 0.85
 --- !u!4 &153169738
 Transform:
@@ -10583,6 +10588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Is_Over_game: 0
   Is_Pause_game: 0
+  _Level: 0
 --- !u!4 &830431905
 Transform:
   m_ObjectHideFlags: 0
@@ -24177,12 +24183,24 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8613814853670885911, guid: 817ea8d762f23214cb0e541ff7a116e4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613814853670885911, guid: 817ea8d762f23214cb0e541ff7a116e4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8613814853884134754, guid: 817ea8d762f23214cb0e541ff7a116e4, type: 3}
       propertyPath: m_Name
       value: Panda
       objectReference: {fileID: 0}
     - target: {fileID: 8613814853884134754, guid: 817ea8d762f23214cb0e541ff7a116e4, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8613814853884134758, guid: 817ea8d762f23214cb0e541ff7a116e4, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8613814853884134761, guid: 817ea8d762f23214cb0e541ff7a116e4, type: 3}
