@@ -12,6 +12,7 @@ public class Panda : MonoBehaviour
     public float speed = 8f; // Tốc độ
     Enemy Conect_Class_Enemy;
     BoxCollider2D _BoxCollider2D;
+    bool Game_over = false;
 
     // Ket nối để thấy đổi Panda
     public GameObject Panda_Left;
@@ -33,12 +34,6 @@ public class Panda : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     // Xử lý khi Panda DIE
     void Handling_Panda_Die()
@@ -50,7 +45,18 @@ public class Panda : MonoBehaviour
         _BoxCollider2D.enabled = false;
         Debug.Log("Panda touches the ground, game over");
         Conect_Class_Audio_Controller.Play_Panda_Dead_sound();
-        Conect_P_A_C.Set_Status(4);
+        Game_over = true;
+        Conect_P_A_C.Set_Status(6);
+    }
+
+
+    public void Set_Game_Over(bool is_Over)
+    {
+        Game_over = is_Over;
+    }
+    public bool Get_Game_Over()
+    {
+       return Game_over;
     }
 
 
@@ -81,7 +87,7 @@ public class Panda : MonoBehaviour
     }
 
 
-    //Lựa chọn animation và panda left hoặc right
+    //panda left hoặc right
     public void Choose_Panda(int Last_Location, int location_tree_and_side)
     {
         
@@ -96,30 +102,6 @@ public class Panda : MonoBehaviour
             Panda_Left.transform.localScale = new Vector3(-1, 1, 1);
         }
         #endregion
-
-        #region Anmation di chuyển qua lại trên 1 cây
-        if (
-            // Panda Right to Left
-            Last_Location == 0 && location_tree_and_side == 2 || Last_Location == 4 && location_tree_and_side == 6 || Last_Location == 8 && location_tree_and_side == 10 ||
-             // Panda Left to Right
-             Last_Location == 2 && location_tree_and_side == 0 || Last_Location == 6 && location_tree_and_side == 4 || Last_Location == 10 && location_tree_and_side == 8
-            )
-        {
-            Conect_P_A_C.Set_Status(1);
-            Debug.Log("Sy Testting");
-        }
-
-            #endregion
-
-
-            #region Anmation di chuyển qua lại trên 1 cây
-            
-        #endregion
-
-
-        //Cây này sang cây kia 2-4, 6-8, 8-6, 4-2
-        //Trái phải trên 1 cây 0-2, 4-6, 8-10, 10-8, 6-4, 2-0
-
     }
 
 

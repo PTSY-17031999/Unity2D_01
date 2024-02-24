@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class Manage_menus : MonoBehaviour
 {
-
-    public GameObject Panel_play;
     public GameObject Panel_Score;
     public GameObject Panel_Ruler;
     public GameObject Panel_Quit_Game;
@@ -16,6 +14,13 @@ public class Manage_menus : MonoBehaviour
     public GameObject Image_Button_on_Audio;
     public GameObject Image_Button_off_Audio;
     Audio_Controller Conect_Audio_Controler;
+
+  
+
+
+
+
+
 
 
     private void Start()
@@ -39,11 +44,8 @@ public class Manage_menus : MonoBehaviour
     // Click hiện các pannel
     public void Show_Pannel(int Miss)
     {
-        //Play
-        if(Miss == 1)
-        {
-            Panel_play.SetActive(true);
-        }
+        if (Miss == 1) Button_Play();
+
         //Panel_Score
         if (Miss == 2)
         {
@@ -63,7 +65,7 @@ public class Manage_menus : MonoBehaviour
     }
 
     // Click play game
-    public void Button_Play()
+     void Button_Play()
     {
         SceneManager.LoadScene("Lever_1");
     }
@@ -76,23 +78,21 @@ public class Manage_menus : MonoBehaviour
 
         if (PlayerPrefs.GetInt("Audio_play") == 0) on_off_audio = false;
         else if (PlayerPrefs.GetInt("Audio_play") == 1) on_off_audio = true;
-        else on_off_audio = true;
+        else on_off_audio = false;
 
 
         Conect_Audio_Controler = FindObjectOfType<Audio_Controller>();
         if (on_off_audio == true)
         { //Off
-            on_off_audio = false;
             PlayerPrefs.SetInt("Audio_play", 0);
-            Image_Button_on_Audio.SetActive(on_off_audio);
-            Image_Button_off_Audio.SetActive(!on_off_audio);
+            Image_Button_on_Audio.SetActive(!on_off_audio);
+            Image_Button_off_Audio.SetActive(on_off_audio);
         }
         else
         { //on
-                on_off_audio = true;
                 PlayerPrefs.SetInt("Audio_play", 1);
-                Image_Button_on_Audio.SetActive(on_off_audio);
-                Image_Button_off_Audio.SetActive(!on_off_audio);
+                Image_Button_on_Audio.SetActive(!on_off_audio);
+                Image_Button_off_Audio.SetActive(on_off_audio);
         }
         Conect_Audio_Controler.Check_On_Off_Audio();
     }

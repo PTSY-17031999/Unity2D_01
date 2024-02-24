@@ -6,6 +6,15 @@ using UnityEngine.UI;
 
 public class Manage_Ui_Gameplay : MonoBehaviour
 {
+    // Test text Function Touch mobile
+
+    public Text Text_test;
+    public void _Set_Text(string a)
+    {
+        Text_test.text = a;
+    }
+
+
 
     // Panel Game Play
     public GameObject Panel_Play;
@@ -33,7 +42,7 @@ public class Manage_Ui_Gameplay : MonoBehaviour
     public GameObject Button_Play_Game;
     public GameObject Button_Pause_Game;
     Game_Controller Conect_Game_Controler;
-    
+
     public void Start()
     {
         Conect_Game_Controler = FindObjectOfType<Game_Controller>();
@@ -59,16 +68,81 @@ public class Manage_Ui_Gameplay : MonoBehaviour
 
         }
         processing(0, Score_Unit, Score_Dozen, Score_Hundred, null);
+        PlayerPrefs.SetFloat("Start_Time", 0);
     }
 
     float Miss_Time = 0;
     float _Time = 1f;
     float Parallel_Time;
-    bool Miss_Stop_Start_Time = false;
-    bool Miss_Pause = false; // Nhớ đang pause game chưa play
+
+
+    #region test tạm dừng 
+    float Start_Time, End_Time;
+    #endregion
+
 
     private void Update()
     {
+        if (Conect_Game_Controler.Get_Over_Game() == true) PlayerPrefs.SetFloat("Start_Time", Time.time);
+        if (Conect_Game_Controler.Get_Pause_Game() == true || Conect_Game_Controler.Get_Over_Game() != false)
+        {
+            Start_Time = Time.time;
+        }
+        else
+        {  
+            End_Time = Time.time;
+
+            if (Start_Time > 0)
+            {
+                Debug.Log(Start_Time);
+                Start_Time = Time.time - (Time.time - Start_Time);
+                PlayerPrefs.SetFloat("Start_Time", PlayerPrefs.GetFloat("Start_Time") + Start_Time);
+                Start_Time = 0;
+            }
+
+
+           Parallel_Time = PlayerPrefs.GetFloat("Start_Time");
+           
+
+
+            // Xử lý thời gian sống
+            Miss_Time += Time.deltaTime;
+            if (Miss_Time >= _Time)
+            {
+                //Debug.Log((int)Math.Round(Time.time));
+                processing((int)Math.Round(Time.time - Parallel_Time), Time_Unit, Time_Dozen, Time_Hundred, Time_Thousand);
+                Miss_Time = 0;
+            }
+            Conect_Game_Controler.Set_Level_Game(Parallel_Time);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
 
         if (Conect_Game_Controler.Get_Pause_Game() == true)
         {
@@ -99,10 +173,11 @@ public class Manage_Ui_Gameplay : MonoBehaviour
             }
             Conect_Game_Controler.Set_Level_Game(Parallel_Time);
         }
+        */
     }
 
     // Xứ lý show image Play or Pause game
-    public void Show_Image_Play_Pause( bool Is_Play)
+    public void Show_Image_Play_Pause(bool Is_Play)
     {
         Button_Play_Game.SetActive(Is_Play);
         Button_Pause_Game.SetActive(!Is_Play);
@@ -112,7 +187,7 @@ public class Manage_Ui_Gameplay : MonoBehaviour
     // Xử lý show panel play hoặc panel game over
     public void Show_Panel_Play_or_Over()
     {
-        if(Panel_Play.activeInHierarchy != true)
+        if (Panel_Play.activeInHierarchy != true)
         {
             Panel_Play.SetActive(true);
             Panel_Game_over.SetActive(false);
@@ -140,13 +215,14 @@ public class Manage_Ui_Gameplay : MonoBehaviour
     {
         processing(Score, Score_Over_Unit, Score_Over_Dozen, Score_Over_Hundred, null);
 
+
     }
 
 
     // Xử lý chuyển số sang hình ảnh
     void processing(int number, List<GameObject> Unit, List<GameObject> Dozen, List<GameObject> Hundred, List<GameObject> Thousand)
     {
-        
+
         for (int i = 0; i <= Unit.Count - 1; i++)
         {
             if (Unit != null) Unit[i].SetActive(false);
@@ -163,12 +239,12 @@ public class Manage_Ui_Gameplay : MonoBehaviour
         {
             Unit[int.Parse(a[1].ToString())].SetActive(true);
             Dozen[int.Parse(a[0].ToString())].SetActive(true);
-            }
+        }
         if (a.Length == 3 & Unit != null & Dozen != null & Dozen != null)
         {
             Unit[int.Parse(a[2].ToString())].SetActive(true);
             Dozen[int.Parse(a[1].ToString())].SetActive(true);
-            Hundred[int.Parse(a[0].ToString())].SetActive(true);
+           Hundred[int.Parse(a[0].ToString())].SetActive(true);
         }
         if (a.Length == 4 & Unit != null & Dozen != null & Dozen != null & Thousand != null)
         {
@@ -177,7 +253,8 @@ public class Manage_Ui_Gameplay : MonoBehaviour
             Hundred[int.Parse(a[1].ToString())].SetActive(true);
             Thousand[int.Parse(a[0].ToString())].SetActive(true);
         }
-        
+
+
 
 
     }

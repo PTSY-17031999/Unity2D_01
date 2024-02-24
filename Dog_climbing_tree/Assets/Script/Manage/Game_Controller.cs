@@ -42,7 +42,7 @@ public class Game_Controller : MonoBehaviour
         Conect_Manage_Ui_Gameplay.Change_Score_Over(Score);
         Save_highests_core();
         Set_Pause_Game();
-        Debug.Log("Game Over");
+        PlayerPrefs.SetFloat("Start_Time", Time.time);
     }
 
     // Set Pause game
@@ -103,7 +103,7 @@ public class Game_Controller : MonoBehaviour
     #region Level
     public void Set_Level_Game(float Time_Live)
     {
-             if (Time_Live >= 60 && Time_Live <= 61) Conect_Create_Enemy.Return_Value_Level(2);
+             if (Time_Live >= 60 && Time_Live <= 70) Conect_Create_Enemy.Return_Value_Level(2);
         else if (Time_Live >= 120 && Time_Live <= 121) Conect_Create_Enemy.Return_Value_Level(3);
         else if (Time_Live >= 180 && Time_Live <= 181) Conect_Create_Enemy.Return_Value_Level(4);
         else if (Time_Live >= 240 && Time_Live <= 241) Conect_Create_Enemy.Return_Value_Level(5);
