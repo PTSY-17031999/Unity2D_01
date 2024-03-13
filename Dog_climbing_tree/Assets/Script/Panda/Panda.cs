@@ -36,7 +36,7 @@ public class Panda : MonoBehaviour
 
 
     // Xử lý khi Panda DIE
-    void Handling_Panda_Die()
+    public void Handling_Panda_Die()
     {
         
         gameObject.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
@@ -70,7 +70,20 @@ public class Panda : MonoBehaviour
         if (col.CompareTag("Panel_AD_or_Ground"))
         {
             Handling_Panda_Die();
+        } 
+        //SỰ KIỆN NHÂN VẬT CHẠM Boom
+        if (col.CompareTag("Boom_01"))
+        {
+            //col.GetComponent<Component>().transform.parent.gameObject.GetComponent<Boom_01>().Boom_Set_Animation();
+            col.GetComponentInParent<Boom_01>().Boom_Set_Animation();
+            Conect_Class_Audio_Controller.Play_Boom_Explosion();
+            Handling_Panda_Die();
+            gameObject.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            Connect_physical.AddForce(Vector2.up * 250);
         }
+
+
+
         //Sự kiện Panda chạm Enemy
         if (col.CompareTag("Enemy"))
         {

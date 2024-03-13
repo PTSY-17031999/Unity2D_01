@@ -42,7 +42,7 @@ public class Game_Controller : MonoBehaviour
         Conect_Manage_Ui_Gameplay.Change_Score_Over(Score);
         Save_highests_core();
         Set_Pause_Game();
-        PlayerPrefs.SetFloat("Start_Time", Time.time);
+       
     }
 
     // Set Pause game

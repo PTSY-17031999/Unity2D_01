@@ -8,6 +8,7 @@ TagManager:
   - Panel_AD_or_Ground
   - Panda
   - Enemy
+  - Boom_01
   layers:
   - Default
   - TransparentFX

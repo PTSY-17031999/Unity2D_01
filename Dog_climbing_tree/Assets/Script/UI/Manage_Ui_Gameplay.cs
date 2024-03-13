@@ -193,12 +193,14 @@ public class Manage_Ui_Gameplay : MonoBehaviour
             Panel_Game_over.SetActive(false);
         }
         else StartCoroutine(WaitForMoving());
-    }
-    private IEnumerator WaitForMoving()
-    {
-        yield return new WaitForSeconds(2); // Chờ 2s mới dược chạy hàm Start_Move
-        Panel_Play.SetActive(false);
-        Panel_Game_over.SetActive(true);
+
+        IEnumerator WaitForMoving()
+        {
+            yield return new WaitForSeconds(4); // Chờ 2s mới dược chạy hàm Start_Move
+            Panel_Play.SetActive(false);
+            Panel_Game_over.SetActive(true);
+        }
+
     }
 
 

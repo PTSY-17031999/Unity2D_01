@@ -9,6 +9,7 @@ public class Audio_Controller : MonoBehaviour
     public AudioClip Enemy_Dead_sound;
     public AudioClip Panda_Dead_sound;
     public AudioClip Click_Button_sound;
+    public AudioClip Boom_Explosion;
 
     public void Play_Panda_Dead_sound() { 
          if (Conect_files_Source && Panda_Dead_sound)
@@ -34,6 +35,14 @@ public class Audio_Controller : MonoBehaviour
         if (Conect_files_Source && Click_Button_sound)
         {
             Conect_files_Source.PlayOneShot(Click_Button_sound);
+        }
+    }
+
+    public void Play_Boom_Explosion()
+    {
+        if (Conect_files_Source && Click_Button_sound)
+        {
+            Conect_files_Source.PlayOneShot(Boom_Explosion);
         }
     }
 
